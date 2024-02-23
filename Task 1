@@ -1,0 +1,51 @@
+import java.util.Scanner;
+import java.util.Random;
+public class Main {
+    public static void main(String[] args)
+    {
+        Scanner Input = new Scanner(System.in);
+        Random RandomNum = new Random();
+
+        int TotalAttempts = 5;
+        int Score = 0;
+
+        Boolean TryAgain = true;
+        while (TryAgain)
+        {
+            int RandomNumber = RandomNum.nextInt(100) + 1;
+
+            boolean CorrectGuess = false;
+            int Attempts = 0;
+            while (!CorrectGuess && Attempts < TotalAttempts)
+            {
+                System.out.println("Guess A Number between 1 and 100");
+                int Guess = Input.nextInt();
+                Attempts++;
+
+                if(Guess == RandomNumber)
+                {
+                    CorrectGuess = true;
+                    Score++;
+                    System.out.println("Your Guess was correct");
+                }
+                else if(Guess > RandomNumber)
+                {
+                    System.out.println("Your Guess was High.Try Again");
+                }
+                else
+                {
+                    System.out.println("Your Guess was Low.Try Again");
+                }
+            }
+            if(!CorrectGuess)
+            {
+                System.out.println("Your Attempt Limit was Reached. The Number was : "+ RandomNumber);
+            }
+            System.out.println("Do you want to Try Again? (yes/no)");
+            String Answer = Input.next().toLowerCase();
+            TryAgain = Answer.equals("yes");
+        }
+        System.out.println("Thanks for Playing, Your Score is " + Score);
+        Input.close();
+    }
+}
